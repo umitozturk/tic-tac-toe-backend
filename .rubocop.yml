@@ -1,0 +1,70 @@
+require:
+  - rubocop-rails
+  - rubocop-performance
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - 'Gemfile'
+    - 'Guardfile'
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+    - 'bin/*'
+    - 'test/factories/*'
+    - vendor/**/*
+
+    #############################
+#
+# Metrics
+#
+#############################
+Metrics/AbcSize:
+  Max: 20
+  Exclude:
+    - 'test/**/*_test.rb'
+    - 'db/migrate/**/*.rb'
+
+Metrics/MethodLength:
+  Max: 15
+  Exclude:
+    - 'test/**/*_test.rb'
+    - 'db/migrate/**/*.rb'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'test/**/*.rb'
+    - 'config/routes.rb'
+
+Metrics/ClassLength:
+  Max: 110
+  Exclude:
+    - 'test/**/*_test.rb'
+
+#############################
+#
+# Layout
+#
+#############################
+Layout/LineLength:
+  Max: 100
+
+#############################
+#
+# Style
+#
+#############################
+Style/Documentation:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Exclude:
+    - 'test/**/*'
+
+#############################
+#
+# Naming
+#
+#############################
+Naming/VariableNumber:
+  CheckSymbols: false
