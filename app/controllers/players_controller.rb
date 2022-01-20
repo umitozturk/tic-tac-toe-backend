@@ -14,7 +14,14 @@ class PlayersController < ApplicationController
   end
 
   def create
-    # TODO: create service
+    new_player = Player.new(player_params)
+
+    if new_player.save
+      render json: new_player, each_serializer: PlayerSerializer
+    else
+      render json: { error: "player #{@player.name} couldn't create" },
+              status: :unprocessable_entity
+    end
   end
 
   # we don't need update and delete for now, but it can be stay here
@@ -28,7 +35,6 @@ class PlayersController < ApplicationController
   # end
 
   # def destroy
-  #   # service needed here
   # end
 
   private
@@ -40,6 +46,6 @@ class PlayersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def player_params
-    params.require(:player).permit(:name)
+    ActiveModelSerializers::Deserialization.jsonapi_parse!(params.to_unsafe_h)
   end
 end
